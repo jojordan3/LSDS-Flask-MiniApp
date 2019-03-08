@@ -2,6 +2,7 @@
 '''
 import tweepy
 from decouple import config
+import basilica
 from .models import DB, Tweet, User
 
 
@@ -16,3 +17,11 @@ TWITTER_AUTH.set_access_token(
 TWITTER = tweepy.API(TWITTER_AUTH)
 
 BASILICA = basilica.Connection(config('BASILICA_KEY'))
+
+'''
+>>>from flask_miniapp.twitter import *
+>>>tweets = twitter_user.timeline(count=200, exclude_replies=True,
+                                  include_rts=False, tweet_mode='extended')
+>>>tweet_text = tweets[0].full_text
+>>>embedding = BASILICA.embed_sentence(tweet_text, model='twitter')
+'''
